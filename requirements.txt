@@ -1,0 +1,12 @@
+openai
+groq
+sentence-transformers
+chromadb
+python-dotenv
+flashrank
+ragas
+datasets
+pymupdf
+python-docx
+python-pptx
+beautifulsoup4

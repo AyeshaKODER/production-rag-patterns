@@ -1,0 +1,94 @@
+AICERTIFY.IN — ENTERPRISE MODEL GOVERNANCE AND AGENT COMPLIANCE FRAMEWORK
+Document Reference: COMP-FRAME-2026-X9
+Classification: Internal Operational Standard
+Last Updated: July 2026
+
+1. ARCHITECTURAL OVERVIEW AND RESPONSIBLE AI MANDATE
+As an enterprise-tier AI auditing and continuous validation platform, aicertify.in mandates a multi-layered approach to model governance. The core engineering framework operates on the premise that no black-box machine learning model should interact with production traffic without a deterministic, mathematically verifiable audit trail. This document establishes the technical protocols, continuous integration triggers, operational thresholds, and financial constraints governing the usage of AI systems within client infrastructures.
+
+Every model deployed under the aicertify.in ecosystem must be assigned a unique Global Model Identifier (GMI) and be bound to a localized governance policy file. The target system consists of three operational planes: the Control Plane (which manages policy distribution and cryptographic ledger receipts), the Evaluation Plane (where the isolated aicertify-agent containers execute statistical analysis loops), and the Inference Data Plane (where production inputs and outputs are securely mirrored via zero-trust enclaves). Mixing these boundaries without strict network isolation is treated as a Category-1 compliance breach.
+
+2. DETAILED HUMAN RESOURCES AND CONTINUOUS ETHICS EDUCATION POLICY
+To execute complex AI compliance audits, employees must remain at the absolute vanguard of machine learning research, automated bias detection frameworks, and evolving global regulatory policies (such as the EU AI Act, FTC guidelines, and India's framework for digital trust).
+
+2.1 Continuous Education and Professional Development Allowances
+Full-time employees working within the engineering, auditing, and compliance departments are entitled to a dedicated Continuous Education Allowance capped strictly at ₹1,50,000 per calendar year. This allowance is distributed up-front or reimbursed retroactively upon successful completion of approved professional paths. Permissible expenditures under this policy include:
+• Registration fees for international Tier-1 AI and ML research conferences (e.g., NeurIPS, ICML, CVPR, and FAccT).
+• Tuition for advanced certifications in cloud architecture, data privacy engineering (e.g., CIPP/E, CIPT), or certified AI auditing curricula.
+• Purchase of specialized textbooks, whitepapers, and technical journal subscriptions directly related to algorithmic auditing.
+
+To utilize this allowance, employees must submit a formalized request via the internal learning portal at least 30 business days prior to the course start date or conference registration deadline. Late applications face an automatic 20% penalty reduction or outright rejection by the HR Benefits Committee. Unused educational balances hold no cash value and cannot be carried over into the subsequent fiscal year.
+
+2.2 Travel and Client-Site Audit Expense Constraints
+When auditors and system architects are dispatched to enterprise client data centers for on-premise integration audits, they must adhere to rigid expense structures. All domestic travel must be booked through the automated corporate travel desk.
+• Flight Parameters: Standard economy class is mandatory for all domestic flights where the total airborne duration is under 4 hours. Premium economy may be requested only if total continuous travel time (including connections) exceeds 7 hours.
+• Lodging Boundaries: Hotel accommodations are capped strictly at ₹8,000 per night in primary metropolitan hubs (including Mumbai, Bengaluru, Delhi NCR, Hyderabad, and Chennai). For tier-2 cities, the cap drops to ₹5,500 per night. Any exceptions require an explicit, written high-cost tier waiver signed off by both the department head and the internal finance controller.
+• Incidentals and Receipts: Individual daily meal allowances are capped at ₹2,500 per day. Itemized receipts showing exact breakdowns are mandatory for all individual reimbursement claims exceeding ₹500. Standard credit card summaries, POS slips, or handwritten statements are explicitly rejected as valid proof of purchase. Expense reports must be compiled and submitted within 14 calendar days post-travel. Submissions delayed past 30 days are automatically forfeited.
+
+3. PRODUCT ARCHITECTURE AND API RATE-LIMITING PROTOCOLS
+The aicertify.in platform exposes a suite of REST and gRPC endpoints designed to intercept or sample production inference streams for real-time drift, bias, and hallucination scoring.
+
+3.1 Ingestion Gateways and Traffic Throttling
+To protect the horizontal scaling boundaries of the platform's multi-tenant clusters, standard production API endpoints enforce a strict rate threshold of 2,500 requests per minute (RPM) per organization tenant. Ingestion traffic profiles are calculated using a rolling window token bucket algorithm executed at the API Gateway level.
+• Burst Buffering: The platform permits transient traffic bursts up to 3,200 RPM for a continuous duration not exceeding 15 seconds. 
+• Over-Quota Behavior: If an organization's ingestion rate crosses the 2,500 RPM threshold without a burst buffer token, the gateway will immediately drop excess payloads. It will return an HTTP 429 'Too Many Requests' status code, accompanied by a standard 'Retry-After' header indicating the exact millisecond cooldown period.
+• Enterprise Cloud Scaling: Organizations requiring high-throughput, low-latency evaluation can provision dedicated single-tenant clusters. These isolated clusters scale dynamically up to 50,000 RPM by deploying auto-scaling worker groups across distributed computing nodes.
+
+3.2 Data Residency and Storage Lifecycle Rules
+By default, all system logs, transaction payloads, and mathematical model weights are processed entirely in-memory within isolated compute enclaves. Evaluation metadata footprints, bias scoring summaries, and drift trend metrics are written to persistent volumes using AES-256 block-level encryption. 
+• Regional Binding: During tenant onboarding, administrators must bind their data residency configuration to a specific geographical node to ensure compliance with localized data protection laws. Supported primary zones include Central India (Mumbai region) and EU West (Frankfurt region). Cross-border replication of raw inference payloads is physically disabled at the hypervisor level.
+• Retention Windows: High-volume raw inference telemetry is automatically purged after 90 calendar days. Aggregated statistical data, cryptographic compliance compliance certificates, and compliance compliance logs are retained for 7 calendar years to satisfy statutory audit requirements.
+
+4. MODEL EVALUATION DEPLOYMENT AND RUNTIME STRESS TESTS
+Deploying the aicertify-agent platform within enterprise Kubernetes clusters requires strict adherence to system prerequisites to avoid introducing execution latency into the host application path.
+
+4.1 Host Infrastructure Hardcoding
+Every host node targeted to run automated bias evaluation workloads must fulfill minimum physical compute specifications:
+• Memory Allocation: A minimum of 4 dedicated vCPU cores and 16GB of unthrottled Error-Correcting Code (ECC) RAM must be pinned to the agent daemon.
+• Swap Restriction: Swap memory spaces must be disabled entirely across the operating system infrastructure. If the underlying host kernel moves execution pages into swap space, the aicertify-agent's tokenization loops experience catastrophic memory thrashing, driving inference latency from a baseline of 12ms to upwards of 1,800ms. To kill swap space instantly, run 'sudo swapoff -a'. To make this permanent, edit the /etc/fstab file and delete all entries pointing to swap volumes.
+
+4.2 Linux Kernel and Network Tuning Parameters
+To achieve seamless ingestion loops, host network stacks must pass bridged traffic directly to iptables chains without intermediate buffering delays. This requires administrators to inject specialized configurations.
+• Module Ingestion: Run 'sudo modprobe overlay' and 'sudo modprobe br_netfilter'. To ensure these modules initialize automatically during the system boot sequence, create a file named /etc/modules-load.d/aicertify-agent.conf and place each module name on its own distinct line.
+• Sysctl Enforcement: Create a runtime configuration file at /etc/sysctl.d/99-aicertify-cri.conf containing the following parameters:
+  - net.bridge.bridge-nf-call-iptables = 1
+  - net.bridge.bridge-nf-call-ip6tables = 1
+  - net.ipv4.ip_forward = 1
+Apply these configurations immediately using 'sudo sysctl --system'.
+
+4.3 Container Runtime Configuration Failures
+The most common implementation failure occurs when the container runtime driver diverges from the host operating system initialization driver. If the host system utilizes systemd (standard on Ubuntu 24.04) and the underlying runtime utilizes cgroupfs, the node will suffer intense resource tracking conflicts under sustained load, crashing the primary logging daemon.
+
+To remediate this, generate a fresh containerd configuration configuration block: 'sudo containerd config default | sudo tee /etc/containerd/config.toml'. Open this file, traverse to the block block structure path '[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]', locate the key string 'SystemdCgroup', and change its explicit boolean value from false to true. Save changes and instantiate the driver update using 'sudo systemctl restart containerd'.
+
+5. MITIGATION OF FALSE POSITIVES IN ALGORITHMIC BIAS ALERTS
+When the evaluation engine processes incoming prediction logs, it applies mathematical slicing to isolate systemic algorithmic bias from harmless background statistical noise.
+
+5.1 Multi-Metric Alignment Slicing
+The platform does not rely on a single demographic statistical calculation. Instead, it aggregates three core metrics simultaneously to calculate a unified, multidimensional Equity Score:
+1. Demographic Parity Difference (DPD): Measures selection rate disparities across protected demographic classes.
+2. Equalized Odds Disparity (EOD): Checks for balance across true positive rates and false positive rates simultaneously.
+3. Disparate Impact Ratio (DIR): Computes the ratio of selection rates between unprivileged and privileged groups.
+
+An alert is only escalated to the enterprise governance dashboard if a statistical divergence score crosses the organization's custom confidence threshold (defaulted to a 95% confidence interval with an effect size exceeding 0.08 Cohen's d). By running differential stratification over streaming slices, the engine successfully eliminates token-level transient noise, ensuring compliance teams only spend human resources investigating valid operational anomalies.
+
+5.2 Dynamic Threshold Tuning and Shadow Auditing Phases
+To prevent alert fatigue within security operations centers, new models must undergo a mandatory 14-day 'Shadow Auditing' phase upon initial cluster registration. During this calibration window, the aicertify-agent tracks live production inference payloads in a non-blocking configuration, logging mathematical divergence without dispatching high-priority upstream webhooks. 
+
+The platform's baseline optimization engine evaluates these historical log slices to establish a localized background noise baseline. If a model naturally exhibits volatile performance due to shifting seasonal user demographics rather than structural algorithmic drift, the engine dynamically widens the operational tolerance boundaries by up to 1.5 standard deviations. This custom-tuned sensitivity envelope ensures that post-deployment alerts reflect true compliance anomalies rather than predictable data variance.
+
+5.3 Transient Noise Suppression and Temporal Sliding Windows
+The ingestion engine applies a temporal sliding window filter to distinguish transient, single-token execution anomalies from persistent systemic violations. A raw payload violation must sustain an out-of-bounds profile across a rolling 120-second time block before a formal system breach ticket is generated. 
+
+If a model outputs an isolated biased inference string due to an uncharacteristic or malformed input prompt, but returns to nominal equity baselines within the 120-second window, the event is flagged as a 'Transient Anomaly' and archived silently. However, if the violation density within the sliding window exceeds 8.5% of total processed transactions, the event bypasses the suppression matrix and immediately triggers an emergency model-suspension webhook.
+
+5.4 Business-Logic Suppression Matrices
+The framework recognizes that certain specialized models require disparate outcomes to fulfill legitimate, legally protected operational mandates (e.g., medical diagnostic tools targeted at specific high-risk demographic populations, or affirmative action hiring workflows). For these scenarios, compliance administrators can construct an explicit Business-Logic Suppression Matrix within the governance dashboard. 
+
+These matrices allow specific protected classes to be completely or partially exempted from standard DPD and DIR threshold triggers. Every suppression rule must be tied to a valid legal or operational variance token, cryptographically signed by the client organization's Chief Compliance Officer (CCO). These rules are evaluated upstream of the alerting engine, preventing authorized operational variations from muddying the real-time compliance queue.
+
+5.5 Cryptographic Log Integrity Protection
+To guarantee that audit logs cannot be manipulated post-facto to hide compliance failures or falsify bias mitigation data, the aicertify-agent enforces a zero-trust cryptographic ledger protocol. Every hourly summary slice generated by the evaluation engine is run through a SHA-256 hashing algorithm to build an immutable, time-stamped Merkle tree. 
+
+The resulting root hashes are automatically committed to the centralized aicertify.in governance ledger at the end of each processing cycle. If an internal actor or external adversary attempts to modify historical database records to mask an unaddressed bias alert, the local ledger validation script will immediately fail the block-level signature verification check during the next automated system integrity sweep.
+

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> - Product Support FAQ</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        h1 { color: #0f172a; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
+        .faq-item { margin-bottom: 24px; padding: 16px; background: #f8fafc; border-left: 4px solid #3b82f6; border-radius: 0 8px 8px 0; }
+        .question { font-weight: bold; color: #1e3a8a; font-size: 1.1em; margin-bottom: 8px; }
+        .answer { color: #334155; }
+    </style>
+</head>
+<body>
+    <h1> Platform Support FAQ</h1>
+    <p>System Configuration & Integration Knowledge Base</p>
+    
+    <div class="faq-item">
+        <div class="question">Q: How does  mitigate false positives during automated bias evaluations?</div>
+        <div class="answer">A: The platform utilizes a dynamic, multi-metric alignment engine that cross-references demographic parity, equalized odds, and disparate impact metrics simultaneously. By running differential slicing analysis over stratified testing datasets, our pipeline filters out token-level noise, ensuring that bias alerts are only triggered if the statistical divergence scores cross your organization's custom confidence thresholds.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="question">Q: What are the exact rate limits for the  live validation API?</div>
+        <div class="answer">A: Standard production API endpoints enforce a strict rate threshold of 2,500 requests per minute per organization tenant. If your ingestion traffic bursts beyond this limit, the gateway responds with an HTTP 429 Too Many Requests status code accompanied by a Retry-After header. Enterprise dedicated cloud clusters can scale up to 50,000 requests per minute upon provisioning auto-scaling worker groups.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="question">Q: Where is evaluation data stored during an active model audit?</div>
+        <div class="answer">A: By default, all system logs, transaction payloads, and mathematical model weights are processed entirely in-memory within isolated compute enclaves. Evaluation summaries and metadata footprints are written to disk using AES-256 block-level encryption. Depending on your regulatory tier, data tenancy can be bound strictly to regions like Central India (Mumbai) or EU West (Frankfurt) via your governance dashboard.</div>
+    </div>
+</body>
+</html>
