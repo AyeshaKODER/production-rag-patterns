@@ -7,6 +7,7 @@ This repo is structured so a learner can go chapter by chapter, building a real,
 working, production-minded RAG + agent system from scratch — not just reading
 about one.
 
+**[Live Demo on Streamlit](https://ayeshakoder-production-rag-patterns-app-rwgtpu.streamlit.app/)**
 ---
 
 ## How to use this repo
